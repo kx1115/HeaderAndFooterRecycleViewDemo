@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        initNormalGoodsTitls();
+        //initNormalGoodsTitls();
         initBigPics();
         initSmallPics();
         mHandler = new Handler();
@@ -130,6 +131,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(rvAdapter);
+        rv.setEmptyView(LayoutInflater.from(this).inflate(R.layout.layout,null));
+
         rv.addItemDecoration(new DividerGridItemDecoration(this));
 
     }
@@ -222,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         goodsTrendView.findViewById(R.id.goodsSectionqbb).setOnClickListener(this);
         goodsTrendView.findViewById(R.id.goodsSectionZqtd).setOnClickListener(this);
 
-        rv.addHeaderView(goodsTrendView);
+        rv.addFooterView(goodsTrendView);
     }
     /**设置10个子菜单的图片和文字*/
     private void initGridMenuAttr(List<GridMenu> gridMenus) {
